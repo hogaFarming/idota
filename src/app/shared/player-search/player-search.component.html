@@ -1,0 +1,9 @@
+<input class="player-search__input" [(ngModel)]="searchTerm" type="text" placeholder="type username">
+<button (click)="search()">search</button>
+<div class="player-search__result">
+  <div class="player-search__entry" *ngFor="let player of searchResult | async">
+    <img class="player-search__avatar" [src]="player.avatarfull" alt="{{player.personaname}}">
+    <div class="player-search__name">{{player.personaname}}</div>
+    <div class="player-search__time">{{player.last_match_time}}</div>
+  </div>
+</div>
