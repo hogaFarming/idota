@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {AuthService} from "../core/auth.service";
 import {Router} from "@angular/router";
 
+import { PlayerInSearch } from '../core/player.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,9 +14,9 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) { }
 
-  login() {
+  login(player: PlayerInSearch) {
     this.message = 'trying to log in...';
-    this.authService.login().subscribe(() => {
+    this.authService.login(player.account_id).subscribe(() => {
       if (this.authService.isLoggedIn) {
         this.message = 'log in success.';
         let redirectUrl = this.authService.redirectUrl || '';

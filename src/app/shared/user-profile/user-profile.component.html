@@ -1,0 +1,16 @@
+<div class="media" *ngIf="userData">
+  <div class="media-left">
+    <p class="image is-64x64">
+      <img [src]="userData.avatarmedium" alt="">
+    </p>
+  </div>
+  <div class="media-content">
+    <p>{{userData.name || userData.personaname}}</p>
+    <p>MMR: {{userData.mmr_estimate}}</p>
+  </div>
+</div>
+<div *ngIf="!userData" style="text-align: center;">
+  <span class="icon is-medium">
+    <i class="fa fa-refresh fa-spin fa-2x"></i>
+  </span>
+</div>

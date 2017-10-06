@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import 'bulma/css/bulma.css';
 
 import { AppComponent } from './app.component';
 import {CoreModule} from "./core/core.module";

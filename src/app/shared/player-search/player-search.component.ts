@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {Observable} from "rxjs/Observable";
-import {PlayerSearchService, SearchResult} from "./player-search.service";
+import {PlayerService, PlayerInSearch} from "../../core/player.service";
 
 @Component({
   selector: 'app-player-search',
@@ -9,15 +9,21 @@ import {PlayerSearchService, SearchResult} from "./player-search.service";
 })
 export class PlayerSearchComponent implements OnInit {
   searchTerm = '韩寒会画画后悔画韩红';
-  searchResult: Observable<SearchResult[]>;
+  searchResult: Observable<PlayerInSearch[]>;
 
-  constructor(private playerSearchService: PlayerSearchService) { }
+  @Output() onSelect = new EventEmitter<PlayerInSearch>();
+
+  constructor(private playerService: PlayerService) { }
 
   ngOnInit() {
   }
 
-  search() {
-    this.searchResult = this.playerSearchService.search(this.searchTerm);
+  search(): void {
+    this.searchResult = this.playerService.search(this.searchTerm);
+  }
+
+  select(player: PlayerInSearch): void {
+    this.onSelect.emit(player);
   }
 
 }

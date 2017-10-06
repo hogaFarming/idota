@@ -9,12 +9,13 @@ const matchesRoutes: Route[] = [
   {
     path: 'matches',
     component: MatchesComponent,
-    canActivate: [AuthGuard],
-    children: [
-      { path: '', redirectTo: 'sub1', pathMatch: 'prefix' },
-      { path: 'sub1', component: Sub1Component },
-      { path: 'sub2', component: Sub2Component }
-    ]
+    canActivate: [AuthGuard]
+    // ,
+    // children: [
+    //   { path: '', redirectTo: 'sub1', pathMatch: 'prefix' },
+    //   { path: 'sub1', component: Sub1Component },
+    //   { path: 'sub2', component: Sub2Component }
+    // ]
   }
 ];
 

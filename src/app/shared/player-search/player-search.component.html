@@ -1,9 +1,21 @@
-<input class="player-search__input" [(ngModel)]="searchTerm" type="text" placeholder="type username">
-<button (click)="search()">search</button>
-<div class="player-search__result">
-  <div class="player-search__entry" *ngFor="let player of searchResult | async">
-    <img class="player-search__avatar" [src]="player.avatarfull" alt="{{player.personaname}}">
-    <div class="player-search__name">{{player.personaname}}</div>
-    <div class="player-search__time">{{player.last_match_time}}</div>
+<input type="text" class="input" [(ngModel)]="searchTerm" (keyup.enter)="search()"
+  placeholder="Type user name & press enter to search">
+<div class="box" *ngIf="searchResult">
+  <div class="columns is-multiline is-1">
+    <div class="column is-narrow" *ngFor="let player of searchResult | async" (click)="select(player)">
+      <div class="media" style="width: 200px;">
+        <figure class="media-left">
+          <p class="image is-64x64">
+            <img [src]="player.avatarfull" alt="{{player.personaname}}">
+          </p>
+        </figure>
+        <div class="media-content is-clipped">
+          <div class="content">
+            <p class="name" title="{{player.personaname}}">{{player.personaname}}</p>
+            <p class="time">{{player.last_match_time | timeFromNow }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

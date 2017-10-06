@@ -1,5 +1,44 @@
-<nav>
-  <a routerLink="sub1">sub1 component</a>
-  <a routerLink="sub2">sub2 component</a>
-</nav>
-<router-outlet></router-outlet>
+<h2>Recent Matches</h2>
+<table class="table">
+  <thead class="thead">
+    <tr class="tr">
+      <th class="th">HERO</th>
+      <th class="th">ID</th>
+      <th class="th">RESULT</th>
+      <th class="th">DURATION</th>
+      <th class="th">KDA</th>
+    </tr>
+  </thead>
+  <tbody class="tbody">
+    <tr class="tr" *ngFor="let match of matches">
+      <td class="td">
+        <div class="media">
+          <figure class="media-left">
+            <p class="image">
+              <img [src]="match.hero_id | heroImage" alt="">
+            </p>
+          </figure>
+          <div class="media-content">
+            <p>{{match.hero_id | heroName}}</p>
+            <p>{{match.player_slot > 128 ? 'Dire' : 'Radiant'}}</p>
+          </div>
+        </div>
+      </td>
+      <td class="td">
+        <p>{{match.match_id}}</p>
+        <p>{{match.game_mode | gameMode}}</p>
+      </td>
+      <td class="td">
+        <p>{{(match.player_slot >= 128 && !match.radiant_win) || (match.player_slot < 128 && match.radiant_win) ? 'Win' : 'Lose'}}</p>
+        <p>{{match.skill | skill}}</p>
+      </td>
+      <td class="td">
+        <p>{{match.duration}}</p>
+        <p>{{match.start_time * 1000 | timeFromNow}}</p>
+      </td>
+      <td class="td">
+        <app-kda-bar style="width: 180px;" [k]="match.kills" [d]="match.deaths" [a]="match.assists"></app-kda-bar>
+      </td>
+    </tr>
+  </tbody>
+</table>
